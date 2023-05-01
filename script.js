@@ -226,7 +226,6 @@
                 }
                 break;
             case 4:
-                console.log(keysRowFifth[0])
                 keyRow = document.querySelector(`#row${n}`)
                 keyBut = document.createElement('div');
                 keyBut.classList.add('keyBtn');
@@ -308,11 +307,9 @@
             textArea.selectionStart = select;
         } else if (el.target.textContent === 'DEL') {
             let select = textArea.selectionStart;
-            console.log(select)
             textArea.textContent = textArea.textContent.replace(textArea.textContent.slice(textArea.selectionStart),
                 textArea.textContent.slice(textArea.selectionStart + 1));
             textArea.selectionStart = select;
-            console.log(textArea.selectionStart)
         } else if (flag) {
             if (el.target.classList.contains('subkey')) {
                 textArea.textContent = textArea.textContent + `${el.target.parentElement.textContent[0].toUpperCase()}`
@@ -379,8 +376,6 @@
 
     document.addEventListener('keydown', function (event) {
        keys.forEach((elem) => {
-           // console.log(event.key)
-           // console.log(elem.textContent[0])
            if(event.key === elem.firstChild.textContent.toLowerCase() || event.key === elem.firstChild.textContent.toUpperCase()){
                let tmp = elem.style.background;
                elem.style.background = 'rgb(44,104,164)';
