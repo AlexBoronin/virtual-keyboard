@@ -64,7 +64,9 @@
         let keyRow
         while (n !== 5) {
             keyRow = document.createElement('div');
-            keyRow.setAttribute('style', 'display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; box-sizing: border-box');
+            keyRow.setAttribute('style',
+                'display: flex; justify-content: space-between; align-items: center; ' +
+                'margin-bottom: 10px; box-sizing: border-box');
             keyRow.setAttribute('id', `row${n}`);
             if (n === 4) {
                 keyRow.style.marginBottom = '0';
@@ -92,8 +94,9 @@
                 subKeyValue = document.createElement('div');
                 keyBut.classList.add('keyBtn');
                 keyBut.setAttribute('style',
-                    'background: rgb(58, 66, 78); color: rgb(250, 250, 250); width: 40px; height: 40px; position: relative; display: flex; ' +
-                    'justify-content: center; align-items: center; font-size: 15px; border-radius: 3px')
+                    'background: rgb(58, 66, 78); color: rgb(250, 250, 250); width: 40px; height: 40px; ' +
+                    'position: relative; display: flex; justify-content: center; align-items: center; ' +
+                    'font-size: 15px; border-radius: 3px');
                 subKeyValue.setAttribute('style', 'position: absolute; top: 5px; left: 5px; font-size: 10px');
                 subKeyValue.classList.add('subkey');
                 for (let i = 0; i < keysRowFirst[0].one.length; i++) {
@@ -123,8 +126,9 @@
                 subKeyValue = document.createElement('div');
                 keyBut.classList.add('keyBtn');
                 keyBut.setAttribute('style',
-                    'background: rgb(58, 66, 78); color: rgb(250, 250, 250); width: 40px; height: 40px; position: relative; display: flex; ' +
-                    'justify-content: center; align-items: center; font-size: 15px; border-radius: 3px')
+                    'background: rgb(58, 66, 78); color: rgb(250, 250, 250); width: 40px; height: 40px; ' +
+                    'position: relative; display: flex; justify-content: center; align-items: center; ' +
+                    'font-size: 15px; border-radius: 3px');
                 subKeyValue.setAttribute('style', 'position: absolute; top: 2px; left: 5px; font-size: 10px');
                 subKeyValue.classList.add('subkey');
                 for (let i = 0; i < keysRowSecond[0].one.length; i++) {
@@ -156,8 +160,9 @@
                 subKeyValue = document.createElement('div');
                 keyBut.classList.add('keyBtn');
                 keyBut.setAttribute('style',
-                    'background: rgb(58, 66, 78); color: rgb(250, 250, 250); width: 40px; height: 40px; position: relative; display: flex; ' +
-                    'justify-content: center; align-items: center; font-size: 15px; border-radius: 3px')
+                    'background: rgb(58, 66, 78); color: rgb(250, 250, 250); width: 40px; height: 40px; ' +
+                    'position: relative; display: flex; justify-content: center; align-items: center; ' +
+                    'font-size: 15px; border-radius: 3px');
                 subKeyValue.setAttribute('style', 'position: absolute; top: 2px; left: 5px; font-size: 10px');
                 subKeyValue.classList.add('subkey');
                 for (let i = 0; i < keysRowThird[0].one.length; i++) {
@@ -189,8 +194,9 @@
                 subKeyValue = document.createElement('div');
                 keyBut.classList.add('keyBtn');
                 keyBut.setAttribute('style',
-                    'background: rgb(58, 66, 78); color: rgb(250, 250, 250); width: 40px; height: 40px; position: relative; display: flex; ' +
-                    'justify-content: center; align-items: center; font-size: 15px; border-radius: 3px')
+                    'background: rgb(58, 66, 78); color: rgb(250, 250, 250); width: 40px; height: 40px; ' +
+                    'position: relative; display: flex; justify-content: center; align-items: center; ' +
+                    'font-size: 15px; border-radius: 3px');
                 subKeyValue.setAttribute('style', 'position: absolute; top: 2px; left: 5px; font-size: 10px');
                 subKeyValue.classList.add('subkey');
                 for (let i = 0; i < keysRowFourth[0].one.length; i++) {
@@ -225,8 +231,9 @@
                 keyBut = document.createElement('div');
                 keyBut.classList.add('keyBtn');
                 keyBut.setAttribute('style',
-                    'background: rgb(58, 66, 78); color: rgb(250, 250, 250); width: 40px; height: 40px; position: relative; display: flex; ' +
-                    'justify-content: center; align-items: center; font-size: 15px; border-radius: 3px');
+                    'background: rgb(58, 66, 78); color: rgb(250, 250, 250); width: 40px; height: 40px; ' +
+                    'position: relative; display: flex; justify-content: center; align-items: center; ' +
+                    'font-size: 15px; border-radius: 3px');
                 for (let i = 0; i < keysRowFifth[0].one.length; i++) {
                     keyBut.textContent = keysRowFifth[0].one[i];
                     if (keyBut.textContent === 'Ctrl' || keyBut.textContent === 'Win' || keyBut.textContent === 'Alt'
@@ -267,18 +274,12 @@
 
     const keys = document.querySelectorAll('.keyBtn');
 
-    // textArea.onkeydown('click', function (){
-    //     phone.keydown(function (el) {
-    //         let keys = el.key.toString();
-    //         const stamp = '0123456789';
-    //         if (stamp.indexOf(keys) === -1 && keys !== 'Backspace') {
-    //             return false
-    //         }
-    //     });
-    // })
     let flag = false;
 
     document.addEventListener('click', function (el) {
+        if (!el.target.classList.contains('keyBtn')) {
+            return false
+        }
         if (el.target === textArea) {
             return false
         }
@@ -302,20 +303,33 @@
         }
         if (el.target.textContent === 'Backspace') {
             let select = textArea.selectionStart;
-            textArea.textContent = textArea.textContent.replace(textArea.textContent.slice(textArea.selectionStart - 1), textArea.textContent.slice(textArea.selectionStart));
+            textArea.textContent = textArea.textContent.replace(textArea.textContent.slice(textArea.selectionStart - 1),
+                textArea.textContent.slice(textArea.selectionStart));
             textArea.selectionStart = select;
         } else if (el.target.textContent === 'DEL') {
             let select = textArea.selectionStart;
             console.log(select)
-            textArea.textContent = textArea.textContent.replace(textArea.textContent.slice(textArea.selectionStart), textArea.textContent.slice(textArea.selectionStart + 1));
+            textArea.textContent = textArea.textContent.replace(textArea.textContent.slice(textArea.selectionStart),
+                textArea.textContent.slice(textArea.selectionStart + 1));
             textArea.selectionStart = select;
             console.log(textArea.selectionStart)
         } else if (flag) {
-            textArea.textContent = textArea.textContent + `${el.target.textContent[0].toUpperCase()}`
-            textArea.selectionStart = textArea.selectionEnd = textArea.textContent.length;
+            if (el.target.classList.contains('subkey')) {
+                textArea.textContent = textArea.textContent + `${el.target.parentElement.textContent[0].toUpperCase()}`
+                textArea.selectionStart = textArea.selectionEnd = textArea.textContent.length;
+            } else {
+                textArea.textContent = textArea.textContent + `${el.target.textContent[0].toUpperCase()}`
+                textArea.selectionStart = textArea.selectionEnd = textArea.textContent.length;
+            }
+
         } else {
-            textArea.textContent = textArea.textContent + `${el.target.textContent[0].toLowerCase()}`
-            textArea.selectionStart = textArea.selectionEnd = textArea.textContent.length;
+            if (el.target.classList.contains('subkey')) {
+                textArea.textContent = textArea.textContent + `${el.target.parentElement.textContent[0].toLowerCase()}`
+                textArea.selectionStart = textArea.selectionEnd = textArea.textContent.length;
+            } else {
+                textArea.textContent = textArea.textContent + `${el.target.textContent[0].toLowerCase()}`
+                textArea.selectionStart = textArea.selectionEnd = textArea.textContent.length;
+            }
         }
 
 
@@ -325,8 +339,55 @@
             el.target.style.background = tmp;
         }, 100);
         textArea.focus();
-
-
     })
-})
-();
+    let pushKeys = false;
+
+    function visibleKeyboard(func, ...codes) {
+        let pressed = new Set();
+
+        document.addEventListener('keydown', function (event) {
+            pressed.add(event.code);
+            for (let code of codes) {
+                if (!pressed.has(code)) {
+                    return;
+                }
+            }
+            pressed.clear();
+            func();
+        });
+        document.addEventListener('keyup', function (event) {
+            pressed.delete(event.code);
+        });
+    }
+
+    visibleKeyboard(
+        () => keyboardNone(),
+        "ControlLeft",
+        "AltLeft",
+        "KeyZ"
+    );
+
+    function keyboardNone() {
+        if (!pushKeys) {
+            keyboard.style.display = 'none';
+            pushKeys = true;
+        } else {
+            keyboard.style.display = 'flex';
+            pushKeys = false;
+        }
+    }
+
+    document.addEventListener('keydown', function (event) {
+       keys.forEach((elem) => {
+           // console.log(event.key)
+           // console.log(elem.textContent[0])
+           if(event.key === elem.firstChild.textContent.toLowerCase() || event.key === elem.firstChild.textContent.toUpperCase()){
+               let tmp = elem.style.background;
+               elem.style.background = 'rgb(44,104,164)';
+               setTimeout(function () {
+                   elem.style.background = tmp;
+               }, 100);
+           }
+       } )
+    });
+})();
