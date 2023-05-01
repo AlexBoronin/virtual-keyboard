@@ -7,7 +7,8 @@
     });
     body.setAttribute('style', 'margin: 0; padding: 0');
     const wrapContent = document.createElement('div');
-    wrapContent.setAttribute('style', 'max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; box-sizing: border-box');
+    wrapContent.setAttribute('style', 'max-width: 720px; margin: 0 auto; display: flex; ' +
+        '                                       flex-direction: column; align-items: center; box-sizing: border-box');
     body.append(wrapContent);
     const area = document.createElement('textarea');
     area.setAttribute('id', 'textPlace');
@@ -16,9 +17,19 @@
     area.setAttribute('style', 'display: inline-block; width: 100%; margin-top: 100px; margin-bottom: 15px');
     wrapContent.append(area);
     const keyboard = document.createElement('div');
-    keyboard.setAttribute('style', 'padding: 10px; border: 1px solid black; width: 100%; box-sizing: border-box; display: flex;' +
-        'flex-direction: column; justify-content: space-between; background: rgb(240, 240, 240); cursor: pointer');
+    keyboard.setAttribute('style', 'padding: 10px; border: 1px solid black; width: 100%; ' +
+        'box-sizing: border-box; display: flex;' +
+        'flex-direction: column; justify-content: space-between; ' +
+        'background: rgb(240, 240, 240); cursor: pointer; ' +
+        'margin-bottom: 20px');
     wrapContent.append(keyboard);
+    const text = document.createElement('div');
+    text.setAttribute('style', 'display: flex; flex-direction: column; justify-content: center; align-items: center; ' +
+        'background: rgb(230, 230, 230); color: rgb(58, 66, 78); width: 100%');
+    text.innerHTML = '<p>Клавиатура создана в операционной системе Windows</p>\n' +
+        '<p>Для переключения языка: left Shift + left Ctrl</p>\n' +
+        '<p>Показать/скрыть клавиатуру: left Ctrl + left Alt + Z</p>'
+    wrapContent.append(text);
     const keysRowFirst = [
         {
             one: ['\`', 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, '-', '=', 'Backspace'],
@@ -84,6 +95,7 @@
                     'background: rgb(58, 66, 78); color: rgb(250, 250, 250); width: 40px; height: 40px; position: relative; display: flex; ' +
                     'justify-content: center; align-items: center; font-size: 15px; border-radius: 3px')
                 subKeyValue.setAttribute('style', 'position: absolute; top: 5px; left: 5px; font-size: 10px');
+                subKeyValue.classList.add('subkey');
                 for (let i = 0; i < keysRowFirst[0].one.length; i++) {
                     keyBut.textContent = keysRowFirst[0].one[i];
                     subKeyValue.textContent = keysRowFirst[0].sub[i];
@@ -114,6 +126,7 @@
                     'background: rgb(58, 66, 78); color: rgb(250, 250, 250); width: 40px; height: 40px; position: relative; display: flex; ' +
                     'justify-content: center; align-items: center; font-size: 15px; border-radius: 3px')
                 subKeyValue.setAttribute('style', 'position: absolute; top: 2px; left: 5px; font-size: 10px');
+                subKeyValue.classList.add('subkey');
                 for (let i = 0; i < keysRowSecond[0].one.length; i++) {
                     keyBut.textContent = keysRowSecond[0].one[i];
                     subKeyValue.textContent = keysRowSecond[0].sub[i];
@@ -146,6 +159,7 @@
                     'background: rgb(58, 66, 78); color: rgb(250, 250, 250); width: 40px; height: 40px; position: relative; display: flex; ' +
                     'justify-content: center; align-items: center; font-size: 15px; border-radius: 3px')
                 subKeyValue.setAttribute('style', 'position: absolute; top: 2px; left: 5px; font-size: 10px');
+                subKeyValue.classList.add('subkey');
                 for (let i = 0; i < keysRowThird[0].one.length; i++) {
                     keyBut.textContent = keysRowThird[0].one[i];
                     subKeyValue.textContent = keysRowThird[0].sub[i];
@@ -178,6 +192,7 @@
                     'background: rgb(58, 66, 78); color: rgb(250, 250, 250); width: 40px; height: 40px; position: relative; display: flex; ' +
                     'justify-content: center; align-items: center; font-size: 15px; border-radius: 3px')
                 subKeyValue.setAttribute('style', 'position: absolute; top: 2px; left: 5px; font-size: 10px');
+                subKeyValue.classList.add('subkey');
                 for (let i = 0; i < keysRowFourth[0].one.length; i++) {
                     keyBut.textContent = keysRowFourth[0].one[i];
                     subKeyValue.textContent = keysRowFourth[0].sub[i];
@@ -264,38 +279,54 @@
     let flag = false;
 
     document.addEventListener('click', function (el) {
-        if(textArea.textContent.length > 1){
-            textArea.selectionStart = textArea.selectionEnd = textArea.textContent.length;
-        }
-        if(el.target === textArea) {
+        if (el.target === textArea) {
             return false
         }
-        if(el.target.textContent === 'Caps Lock' && !flag){
+        if (el.target.textContent === 'Caps Lock' && !flag) {
             el.target.style.background = 'green';
             flag = !flag;
             return false
-        }else if(el.target.textContent === 'Caps Lock' && flag){
+        } else if (el.target.textContent === 'Caps Lock' && flag) {
             el.target.style.background = 'rgb(28, 35, 46)';
             flag = !flag;
             return false
         }
-        // console.log(el.target.textContent[0])
-        // console.log(el.target.textContent[1])
-
-        if(el.target.textContent === 'Backspace'){
-            textArea.textContent = textArea.textContent.slice(0, textArea.textContent.length-1);
-        }else {
-            if (flag) {
-                textArea.textContent = textArea.textContent + `${el.target.textContent[0].toUpperCase()}`
-            }else {
-                textArea.textContent = textArea.textContent + `${el.target.textContent[0].toLowerCase()}`
-            }
+        if (el.target.textContent === 'ENTER') {
+            textArea.innerHTML = textArea.textContent + `&#10;`
+            let tmp = el.target.style.background;
+            el.target.style.background = 'rgb(44,104,164)';
+            setTimeout(function () {
+                el.target.style.background = tmp;
+            }, 100);
+            return false
         }
+        if (el.target.textContent === 'Backspace') {
+            let select = textArea.selectionStart;
+            textArea.textContent = textArea.textContent.replace(textArea.textContent.slice(textArea.selectionStart - 1), textArea.textContent.slice(textArea.selectionStart));
+            textArea.selectionStart = select;
+        } else if (el.target.textContent === 'DEL') {
+            let select = textArea.selectionStart;
+            console.log(select)
+            textArea.textContent = textArea.textContent.replace(textArea.textContent.slice(textArea.selectionStart), textArea.textContent.slice(textArea.selectionStart + 1));
+            textArea.selectionStart = select;
+            console.log(textArea.selectionStart)
+        } else if (flag) {
+            textArea.textContent = textArea.textContent + `${el.target.textContent[0].toUpperCase()}`
+            textArea.selectionStart = textArea.selectionEnd = textArea.textContent.length;
+        } else {
+            textArea.textContent = textArea.textContent + `${el.target.textContent[0].toLowerCase()}`
+            textArea.selectionStart = textArea.selectionEnd = textArea.textContent.length;
+        }
+
+
         let tmp = el.target.style.background;
         el.target.style.background = 'rgb(44,104,164)';
-        setTimeout(function (){
+        setTimeout(function () {
             el.target.style.background = tmp;
         }, 100);
+        textArea.focus();
+
 
     })
-})();
+})
+();
