@@ -12,6 +12,7 @@
     const area = document.createElement('textarea');
     area.setAttribute('id', 'textPlace');
     area.setAttribute('rows', '5');
+    area.setAttribute('type', 'text');
     area.setAttribute('style', 'display: inline-block; width: 100%; margin-top: 100px; margin-bottom: 15px');
     wrapContent.append(area);
     const keyboard = document.createElement('div');
@@ -19,22 +20,31 @@
         'flex-direction: column; justify-content: space-between; background: rgb(240, 240, 240); cursor: pointer');
     wrapContent.append(keyboard);
     const keysRowFirst = [
-        {one: ['\`',  1,   2,   3,   4,   5,   6,   7,   8,   9,   0, '-', '=', 'Backspace'],
-            sub: ['~', '!', '@', '#', '$', '%', ':', '?', '*', '(', ')', '_', '+', '']}
+        {
+            one: ['\`', 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, '-', '=', 'Backspace'],
+            sub: ['~', '!', '@', '#', '$', '%', ':', '?', '*', '(', ')', '_', '+', '']
+        }
     ];
     const keysRowSecond = [
-        {one: ['Tab', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '[', ']', '\\', 'DEL'],
-            sub: [   '', 'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ',  '/', '']}
+        {
+            one: ['Tab', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '[', ']', '\\', 'DEL'],
+            sub: ['', 'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ', '/', '']
+        }
     ];
     const keysRowThird = [
-        {one: ['Caps Lock', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ';', '\'', 'ENTER'],
-            sub: [      '', 'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж',  'э', '']}
+        {
+            one: ['Caps Lock', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ';', '\'', 'ENTER'],
+            sub: ['', 'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'э', '']
+        }
     ];
     const keysRowFourth = [
-        {one: ['Shift', '\\', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', '.', ',', '/', `up`, 'Shift'],
-            sub: [  '',   '', 'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', '.',  '', '']}
+        {
+            one: ['Shift', '\\', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', '.', ',', '/', `up`, 'Shift'],
+            sub: ['', '', 'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', '.', '', '']
+        }
     ];
     const keysRowFifth = [{one: ['Ctrl', 'Win', 'Alt', ' ', 'Alt', 'Ctrl', 'left', 'down', 'right']}];
+
     // const spec = ['\`', 'Backspace', 'Tab', 'DEL', 'Caps Lock', 'ENTER', 'Shift1', 'Shift2', 'Ctrl', 'Win', 'Alt', `up`, 'left', 'down', 'right']
 
     function addRow() {
@@ -59,13 +69,12 @@
     addRow();
 
 
-
     function addKeys(n) {
         let tmp
         let keyBut
         let subKeyValue
         let keyRow
-        switch (n){
+        switch (n) {
             case 0:
                 keyRow = document.querySelector(`#row${n}`)
                 keyBut = document.createElement('div');
@@ -73,19 +82,19 @@
                 keyBut.classList.add('keyBtn');
                 keyBut.setAttribute('style',
                     'background: rgb(58, 66, 78); color: rgb(250, 250, 250); width: 40px; height: 40px; position: relative; display: flex; ' +
-                        'justify-content: center; align-items: center; font-size: 15px; border-radius: 3px')
+                    'justify-content: center; align-items: center; font-size: 15px; border-radius: 3px')
                 subKeyValue.setAttribute('style', 'position: absolute; top: 5px; left: 5px; font-size: 10px');
                 for (let i = 0; i < keysRowFirst[0].one.length; i++) {
                     keyBut.textContent = keysRowFirst[0].one[i];
                     subKeyValue.textContent = keysRowFirst[0].sub[i];
-                    if(keyBut.textContent === '\`' || keyBut.textContent === 'Backspace'){
+                    if (keyBut.textContent === '\`' || keyBut.textContent === 'Backspace') {
                         keyBut.style.background = 'rgb(28, 35, 46)';
                         keyBut.style.color = 'rgb(173,173,173)';
                     } else {
                         keyBut.style.background = 'rgb(58, 66, 78)';
                         keyBut.style.color = 'rgb(250, 250, 250)';
                     }
-                    if(keyBut.textContent === 'Backspace'){
+                    if (keyBut.textContent === 'Backspace') {
                         keyBut.style.width = '100px';
                     }
 
@@ -94,7 +103,7 @@
                     tmp = keyRow.innerHTML;
                     keyRow.innerHTML = tmp;
                 }
-            break;
+                break;
 
             case 1:
                 keyRow = document.querySelector(`#row${n}`)
@@ -108,16 +117,16 @@
                 for (let i = 0; i < keysRowSecond[0].one.length; i++) {
                     keyBut.textContent = keysRowSecond[0].one[i];
                     subKeyValue.textContent = keysRowSecond[0].sub[i];
-                    if(keyBut.textContent === 'Tab' || keyBut.textContent === 'DEL'){
+                    if (keyBut.textContent === 'Tab' || keyBut.textContent === 'DEL') {
                         keyBut.style.background = 'rgb(28, 35, 46)';
                         keyBut.style.color = 'rgb(173,173,173)';
                     } else {
                         keyBut.style.background = 'rgb(58, 66, 78)';
                         keyBut.style.color = 'rgb(250, 250, 250)';
                     }
-                    if(keyBut.textContent === 'Tab'){
+                    if (keyBut.textContent === 'Tab') {
                         keyBut.style.width = '50px';
-                    } else if (keyBut.textContent === 'DEL'){
+                    } else if (keyBut.textContent === 'DEL') {
                         keyBut.style.width = '45px';
                     } else {
                         keyBut.style.width = '40px';
@@ -140,16 +149,16 @@
                 for (let i = 0; i < keysRowThird[0].one.length; i++) {
                     keyBut.textContent = keysRowThird[0].one[i];
                     subKeyValue.textContent = keysRowThird[0].sub[i];
-                    if(keyBut.textContent === 'Caps Lock' || keyBut.textContent === 'ENTER'){
+                    if (keyBut.textContent === 'Caps Lock' || keyBut.textContent === 'ENTER') {
                         keyBut.style.background = 'rgb(28, 35, 46)';
                         keyBut.style.color = 'rgb(173,173,173)';
                     } else {
                         keyBut.style.background = 'rgb(58, 66, 78)';
                         keyBut.style.color = 'rgb(250, 250, 250)';
                     }
-                    if(keyBut.textContent === 'Caps Lock'){
+                    if (keyBut.textContent === 'Caps Lock') {
                         keyBut.style.width = '100px';
-                    } else if (keyBut.textContent === 'ENTER'){
+                    } else if (keyBut.textContent === 'ENTER') {
                         keyBut.style.width = '85px';
                     } else {
                         keyBut.style.width = '40px';
@@ -172,21 +181,21 @@
                 for (let i = 0; i < keysRowFourth[0].one.length; i++) {
                     keyBut.textContent = keysRowFourth[0].one[i];
                     subKeyValue.textContent = keysRowFourth[0].sub[i];
-                    if(keyBut.textContent === 'Shift' || keyBut.textContent === 'up'){
+                    if (keyBut.textContent === 'Shift' || keyBut.textContent === 'up') {
                         keyBut.style.background = 'rgb(28, 35, 46)';
                         keyBut.style.color = 'rgb(173,173,173)';
                     } else {
                         keyBut.style.background = 'rgb(58, 66, 78)';
                         keyBut.style.color = 'rgb(250, 250, 250)';
                     }
-                    if(keyBut.textContent === 'Shift' && i !== keysRowFourth[0].one.length - 1){
+                    if (keyBut.textContent === 'Shift' && i !== keysRowFourth[0].one.length - 1) {
                         keyBut.style.width = '100px';
                     } else if (keyBut.textContent === 'Shift' && i === keysRowFourth[0].one.length - 1) {
                         keyBut.style.width = '40px';
                     } else {
                         keyBut.style.width = '40px';
                     }
-                    if(keyBut.textContent === 'up') {
+                    if (keyBut.textContent === 'up') {
                         keyBut.innerHTML = '<img src="./images/tria-up.png" alt="Up" class="up" style="width: 15px">';
                     }
                     keyBut.append(subKeyValue);
@@ -205,30 +214,31 @@
                     'justify-content: center; align-items: center; font-size: 15px; border-radius: 3px');
                 for (let i = 0; i < keysRowFifth[0].one.length; i++) {
                     keyBut.textContent = keysRowFifth[0].one[i];
-                    if(keyBut.textContent === 'Ctrl' || keyBut.textContent === 'Win' || keyBut.textContent === 'Alt'
-                        || keyBut.textContent === 'left' || keyBut.textContent === 'down' || keyBut.textContent === 'right'){
+                    if (keyBut.textContent === 'Ctrl' || keyBut.textContent === 'Win' || keyBut.textContent === 'Alt'
+                        || keyBut.textContent === 'left' || keyBut.textContent === 'down' || keyBut.textContent === 'right') {
                         keyBut.style.background = 'rgb(28, 35, 46)';
                         keyBut.style.color = 'rgb(173,173,173)';
                     } else {
                         keyBut.style.background = 'rgb(58, 66, 78)';
                         keyBut.style.color = 'rgb(250, 250, 250)';
                     }
-                    if(keyBut.textContent === 'Ctrl'){
+                    if (keyBut.textContent === 'Ctrl') {
                         keyBut.style.width = '65px';
                     } else {
                         keyBut.style.width = '40px';
                     }
-                    if(keyBut.textContent === 'left') {
+                    if (keyBut.textContent === 'left') {
                         keyBut.innerHTML = '<img src="./images/tria-left.png" alt="Left" class="left" style="width: 15px; height: 7px">';
                     }
-                    if(keyBut.textContent === 'down') {
+                    if (keyBut.textContent === 'down') {
                         keyBut.innerHTML = '<img src="./images/tria-down.png" alt="Down" class="down" style="width: 15px">';
                     }
-                    if(keyBut.textContent === 'right') {
+                    if (keyBut.textContent === 'right') {
                         keyBut.innerHTML = '<img src="./images/tria-right.png" alt="Right" class="right" style="width: 15px; height: 7px">';
                     }
-                    if(keyBut.textContent === ' ') {
+                    if (keyBut.textContent === ' ') {
                         keyBut.style.width = '285px';
+                        keyBut.innerHTML = '&nbsp;';
                     }
                     keyRow.append(keyBut);
                     tmp = keyRow.innerHTML;
@@ -239,14 +249,53 @@
     }
 
     const textArea = document.querySelector('#textPlace');
+
     const keys = document.querySelectorAll('.keyBtn');
 
-    // const click = () => {
-    //     document.addEventListener('click')
-    // }
-    document.addEventListener('click', function (el){
-        console.log(el.target.textContent[0])
-        console.log(el.target.textContent[1])
-        console.log(el.target)
+    // textArea.onkeydown('click', function (){
+    //     phone.keydown(function (el) {
+    //         let keys = el.key.toString();
+    //         const stamp = '0123456789';
+    //         if (stamp.indexOf(keys) === -1 && keys !== 'Backspace') {
+    //             return false
+    //         }
+    //     });
+    // })
+    let flag = false;
+
+    document.addEventListener('click', function (el) {
+        if(textArea.textContent.length > 1){
+            textArea.selectionStart = textArea.selectionEnd = textArea.textContent.length;
+        }
+        if(el.target === textArea) {
+            return false
+        }
+        if(el.target.textContent === 'Caps Lock' && !flag){
+            el.target.style.background = 'green';
+            flag = !flag;
+            return false
+        }else if(el.target.textContent === 'Caps Lock' && flag){
+            el.target.style.background = 'rgb(28, 35, 46)';
+            flag = !flag;
+            return false
+        }
+        // console.log(el.target.textContent[0])
+        // console.log(el.target.textContent[1])
+
+        if(el.target.textContent === 'Backspace'){
+            textArea.textContent = textArea.textContent.slice(0, textArea.textContent.length-1);
+        }else {
+            if (flag) {
+                textArea.textContent = textArea.textContent + `${el.target.textContent[0].toUpperCase()}`
+            }else {
+                textArea.textContent = textArea.textContent + `${el.target.textContent[0].toLowerCase()}`
+            }
+        }
+        let tmp = el.target.style.background;
+        el.target.style.background = 'rgb(44,104,164)';
+        setTimeout(function (){
+            el.target.style.background = tmp;
+        }, 100);
+
     })
 })();
